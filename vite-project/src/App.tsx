@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import './App.css'
+import './App.css';
 
 function App() {
   const [inputValue, setInputValue] = useState(''); // inputValueのstateを作成。はじめは空の文字列。
