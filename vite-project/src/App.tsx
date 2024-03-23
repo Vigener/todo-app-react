@@ -93,7 +93,7 @@ function App() {
                 value={todo.inputValue}
                 disabled={todo.checked}
               />
-              <input type="checkbox" onChange={(e) => handleChecked(todo.id, todo.checked)}/>
+              <input type="checkbox" onChange={() => handleChecked(todo.id, todo.checked)}/>
               <button onClick={() => handleDelete(todo.id)}>削除</button>
             </li>
           ))}
