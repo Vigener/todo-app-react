@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css';
+import AddTodo from './components/AddTodo';
+import DeleteTodo from './components/DeleteTodo';
+import TodoList from './components/TodoList';
 
 function App() {
   const [inputValue, setInputValue] = useState(''); // inputValueのstateを作成。はじめは空の文字列。
@@ -75,6 +78,11 @@ function App() {
   return (
       <div className='App'>
         <h2>Todoリスト</h2>
+        {/* <AddTodo todos={todos} setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
+        <DeleteTodo todos={todos} setTodos={setTodos} /> */}
+
+
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"
