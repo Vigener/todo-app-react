@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import './App.css';
 import AddTodo from './components/AddTodo';
 import DeleteTodo from './components/DeleteTodo';
 import TodoList from './components/TodoList';
+import { Box, Button, TextField } from '@mui/material';
 
 function App() {
   const [inputValue, setInputValue] = useState(''); // inputValueのstateを作成。はじめは空の文字列。
@@ -27,10 +28,6 @@ function App() {
     checked: boolean;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  }
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // enterを押してもリロードされないようにする。
     // 新しいTodoを作成する。inputValueが空の場合は何もしない。
@@ -45,8 +42,8 @@ function App() {
     // inputValueを空にする。
     setInputValue('');
     // 入力欄を空にする。
-    const inputText = document.querySelector('.inputText') as HTMLInputElement;
-    inputText.value = '';
+    // const inputText = document.querySelector('.inputText') as HTMLInputElement;
+    // inputText.value = '';
   }
 
   const handleEdit = (id: number, inputValue: string) => {
@@ -81,16 +78,22 @@ function App() {
         {/* <AddTodo todos={todos} setTodos={setTodos} />
         <TodoList todos={todos} setTodos={setTodos} />
         <DeleteTodo todos={todos} setTodos={setTodos} /> */}
-
-
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            onChange={(e) => handleChange(e)}
-            className='inputText'
-          />
-          <input type="submit" value="作成" className='submitButton' />
-        </form>
+          <form onSubmit={(e) => handleSubmit(e)}>
+            <Box sx={{display: 'flex'}}>
+              <TextField
+                type="text" 
+                label="タスクを入力" 
+                value={inputValue} 
+                onChange={e => setInputValue(e.target.value)} 
+                className='inputText' 
+                size="small"
+                color='primary'
+                focused
+              />
+              <Button type="submit" variant="contained" color="primary">作成</Button>
+            </Box>
+          </form>
+        <br />
         <ul className='todoList'>
           {todos.map((todo) => (
             <li key={todo.id}>
