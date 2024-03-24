@@ -1,8 +1,8 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css';
-import AddTodo from './components/AddTodo';
-import DeleteTodo from './components/DeleteTodo';
-import TodoList from './components/TodoList';
+// import AddTodo from './components/AddTodo';
+// import DeleteTodo from './components/DeleteTodo';
+// import TodoList from './components/TodoList';
 import { Box, Button, TextField } from '@mui/material';
 
 function App() {
@@ -104,7 +104,7 @@ function App() {
                 value={todo.inputValue}
                 disabled={todo.checked}
               />
-              <input type="checkbox" onChange={(e) => handleChecked(todo.id, todo.checked)}/>
+              <input type="checkbox" onChange={() => handleChecked(todo.id, todo.checked)}/>
               <button onClick={() => handleDelete(todo.id)}>削除</button>
             </li>
           ))}
