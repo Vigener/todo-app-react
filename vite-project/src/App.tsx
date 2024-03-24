@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 import './App.css';
+import Button from '@mui/material/Button';
+import { Box, TextField } from '@mui/material';
 
 function App() {
   const [inputValue, setInputValue] = useState(''); // inputValueのstateを作成。はじめは空の文字列。
@@ -72,17 +74,50 @@ function App() {
     setTodos(newTodos);
   }
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleChange2 = () => {
+    if (!inputRef.current) return;
+    setInputValue(inputRef.current.value);
+  }
+
+  const handleSubmit2 = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+    e.preventDefault(); // enterを押してもリロードされないようにする。
+    // 新しいTodoを作成する。inputValueが空の場合は何もしない。
+    if (!inputRef.current) return;
+    const newTodo: Todo = {
+      inputValue: inputRef.current.value,
+      id: todos.length,
+      checked: false
+    };
+    // 新しいTodoをtodosに追加する。
+    setTodos([newTodo, ...todos,]);
+    // inputValueを空にする。
+    setInputValue('');
+    // 入力欄を空にする。
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  }
+
   return (
       <div className='App'>
-        <h2>Todoリスト</h2>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        {/* <h2>Todoリスト</h2> */}
+        {/* <form onSubmit={(e) => handleSubmit(e)}>
           <input
             type="text"
             onChange={(e) => handleChange(e)}
             className='inputText'
           />
           <input type="submit" value="作成" className='submitButton' />
-        </form>
+        </form> */}
+        <hr />
+        <h2>Todoリスト</h2>
+        {/* <input ref={inputRef} type="text" onChange={() => handleChange2()} /> */}
+        <Box sx={{display: 'flex'}}>
+          <TextField id="outlined-basic" label="タスクを入力"  variant="outlined" size="small" ref={inputRef} type='text' onChange={() => handleChange2()}/>
+          <Button variant="contained" color="primary" onClick={(e) => handleSubmit2(e)}>作成</Button>
+        </Box>
         <ul className='todoList'>
           {todos.map((todo) => (
             <li key={todo.id}>
