@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import "./index.css";
 // import AddTodo from './components/AddTodo';
 // import DeleteTodo from './components/DeleteTodo';
 // import TodoList from './components/TodoList';
@@ -75,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Todoリスト</h2>
+      <h2 className="">Todoリスト</h2>
       <Progress />
       {/* <AddTodo todos={todos} setTodos={setTodos} />
         <TodoList todos={todos} setTodos={setTodos} />
